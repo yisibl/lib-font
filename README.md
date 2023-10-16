@@ -1,5 +1,7 @@
 # LibFont - lifting the hood on your fonts
 
+> This fork supports CommonJS, see [bundle.js](bundle.js)
+
 If you're looking for the (really) old ES5 version of LibFont, when it was still called "Font.js", you should be able to find it [here](https://github.com/Pomax/lib-font/tree/v2015).
 
 

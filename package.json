@@ -1,10 +1,16 @@
 {
-  "name": "lib-font",
+  "name": "lib-font-cjs",
   "version": "2.4.1",
   "description": "A JS based OpenType font inspector",
   "main": "./lib-font.js",
-  "exports": "./lib-font.js",
-  "type": "module",
+  "module": "./lib-font.mjs",
+  "exports": {
+    ".": {
+      "import": "./lib-font.mjs",
+      "default": "./lib-font.js"
+    },
+    "./index_bg.wasm": "./index_bg.wasm"
+  },
   "author": "Pomax",
   "license": "LICENSE.md",
   "directories": {
@@ -13,8 +19,9 @@
   },
   "scripts": {
     "bundle": "run-s rollup terser",
+    "bundle:cjs": "node bundle.js",
     "clean": "prettier --write \"src/**/*.js\"",
-    "rollup": "rollup -i lib-font.js -n Font -o lib-font.browser.js --inlineDynamicImports --external fs,zlib",
+    "rollup": "rollup -i lib-font.mjs -n Font -o lib-font.browser.js --inlineDynamicImports --external fs,zlib",
     "start": "npm test",
     "terser": "terser lib-font.browser.js -o lib-font.browser.js",
     "test:browser": "run-p test:server test:puppeteer",
@@ -43,6 +50,7 @@
   "homepage": "https://github.com/Pomax/lib-font#readme",
   "devDependencies": {
     "cross-env": "^7.0.2",
+    "esbuild": "^0.19.4",
     "express": "^4.17.1",
     "http-server": "^0.12.3",
     "jest": "^26.6.3",
